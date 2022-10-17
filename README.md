@@ -30,4 +30,14 @@
    1-5. styled component의 유용한 트릭
    button태그의 style만 승계받고, 태그 자체인 button은 받고 싶지 을때는 어떻게할까? 새롭게 정의하는게 아니라 컴포넌트를 생성하는 부분에서 as라는 props를 사용하고 원하는 태그명을 입력하면 태그명이 변경되어 나온다.
 
+   1-6. styled component에서 애니메이션 다루기
+   keyframes 컴포넌트를 호출하고, 사용한다.
+   keyframes`` 벡틱안에 css문법으로 animation을 정의하고
+   정의된 keyframes변수를 ${}문법으로 넣어주면 된다.
+   props로 넣어줄 필요는 없다. (고로 위에서 먼저 선언해줘야함.)
+
+   1-7. selector기능을 사용할 수 있는데, 특정 컴포넌트를 styled로 만들었고, 그 안에 span과 같은 태그가 있다면?
+   그 태그를 위해 styled로 또 정의할수도 있지만, 공통처리처럼
+   내부안에서 sass느낌으로 Box{span{ span에 대한 css }}를 처리 할 수도 있다.
+
 2.
