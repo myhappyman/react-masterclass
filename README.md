@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+기초 리액트에서 배운 문법들을 활용하여 넷플릭스 프로젝트를 진행한다.
+섹션별로 진행이되며, 점진적으로 프로젝트가 커지고 새로운것을 도입하여 프로젝트를 완성할 계획이다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. styled components
+   styled components 가 어째서 React.js의 스타일 적용에 최고인지 알아본다.
+   어떻게 생산성에 도움이 되는지 알아볼 것이다.
+   ex) 다크모드, 라이트모드 같은걸 아주 쉽게 적용할 수 있도록 도와준다.
 
-## Available Scripts
+1-1. npm i styled-components
+styled-components를 설치하는 명령어.
 
-In the project directory, you can run:
+1-2. styled를 사용해보기.
+styled를 사용하고 원하는 태그를 선택한다.
+이후 스타일을 적용을 위해 백틱(``)을 사용한다. (',"는 안됨!)
+백틱안에는 css를 적는다.
+css까지 정의를 했으면 해당 컴포넌트를 일반적으로 만들던 div와같은 태그 대신에 컴포넌트명으로 입력한다.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1-3. styled component는 class명을 임의로 생성하고 정의한 css코드를
+어딘가에 담아둔다.
