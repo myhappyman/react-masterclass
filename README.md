@@ -46,6 +46,18 @@
    그렇게되면, as를 통해 어떤 태그가 오더라도 적용이 가능한 태그면 css가 동작한다.
    즉 컴포넌트 자체를 넣어서 타겟팅을 할 수 있다..
 
-   1-9. 복습
+   1-9. Theme
+   모든 색깔을 하나의 object안에 넣어놓은걸 Theme라고 부른다.
+   추후 색을 바꿀 때, component들의 색을 하나하나 바꾸는게 아니라 object만 변경하면 된다.
+   Theme를 사용하기 위해서는 ThemeProvider를 import해서 사용한다.
+   ThemeProvider는 theme라는 props가 필요하다.
+
+   2가지 이상의 테마를 만들어주고, 동일한 이름의 명확한 꾸며주는 색상명칭들을 설정하고 색상을 넣어준다.
+   이후 ThemeProvider로 App을 감싸고 props로 theme를 넣어주면,
+   App에서는 props.theme로 값을 가져올 수 있다.
+   설정이 끝나면 최상단의 ThemeProvider에 theme값만 바뀌면
+   컴포넌트 값을 바꿀필요없이 전부 변경된 값으로 적용이 된다.
+   꼭 테마별 TextColor, bgColor등 이름들은 같게 설정해야한다.
+   여기까지 50%의 theme사용법!
 
 2.
