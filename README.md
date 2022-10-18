@@ -60,4 +60,9 @@
    꼭 테마별 TextColor, bgColor등 이름들은 같게 설정해야한다.
    여기까지 50%의 theme사용법!
 
-2.
+2. TypeScript, ReactJs, styled-component를 혼합해서 프로젝트 진행
+   2-0. 간단하게 TypeScript를 알아본다.
+   strongly-type언어로 프로그래밍 언어가 작동하기 전에 type을 확인한다.
+   Javascript는 인터프리터 언어로 실행하기 직전까진 오류가 있던지 말던지 신경쓰지 않는다.
+   또한, 타입도 무엇인지 상관하지 않는다.
+   잘못된 타입이 들어오거나 잘못된 object의 값을 호출해서 undefined가 발생하는 이슈들을 미연에 방지해준다.
