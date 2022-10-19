@@ -104,3 +104,24 @@
    위 형태로 <명칭> 으로 입력한다.
 
    \*interface는 object를 설명해주는것이라고 생각하면 된다.
+
+   2-3. interface를 통해 typescript가 알 수 있도록 정의를 해줬는데,
+   정의를 하게되면 해당 옵션은 필수값인 required가 되어버린다.
+   개발을 하다보면 넣어야하는 경우 없어야하는 경우가 있는데, 이럴땐 명칭뒤에 '?' 물음표 하나를 추가해주면
+   optional처리가 되어서 없어도 타입스크립트가 오류를 뿜어내지 않는다.
+
+   하지만 넘기는 props는 optional이고 실제로 그리는 컴포넌트의 css에
+   border값과 같은곳에 undefined가 들어간다면? 이상한 css문법이 될 것이다.
+   물론 똑똑한 브라우저는 알아서 초기값을 해줄수도 있겠지만, 사용자가 초기값을 정해주는게 맞다고 생각이 든다.
+   여기서 값이 들어오지 않아 undefined로 들어온다면
+
+   es2020추가된 '??' 연산자로 초기값을 처리할 수 있다.
+
+   borderColor={borderColor ?? "white"}
+
+   -A ?? B
+   Nullish Coalescing Operator라고 불리며, A의 값이 null이거나 undefined이라면 B가 되어라 라는 의미가 된다.
+
+   또는 아래와 같이 파라미터상태에서 처리도 가능하다.
+   function A({text = "기본 메시지"}){ }
+   이것 또한 es6로 기억한다.
