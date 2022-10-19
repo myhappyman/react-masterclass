@@ -66,3 +66,27 @@
    Javascript는 인터프리터 언어로 실행하기 직전까진 오류가 있던지 말던지 신경쓰지 않는다.
    또한, 타입도 무엇인지 상관하지 않는다.
    잘못된 타입이 들어오거나 잘못된 object의 값을 호출해서 undefined가 발생하는 이슈들을 미연에 방지해준다.
+
+   2-1. typescript 사용을 위한 리액트를 개발하기 위해서는 보통 2가지 방식이 있다.
+   첫번째는 명령어를 통해 프로젝트를 처음부터 타입스크립트 버전으로 생성하는것이다.
+
+   > npx create-react-app my-app --template typescript
+
+   두번째 방식으로 위의 간단한 방식이 싫다면 typescript에 관련된 모든것을 전부 설치해줘야 한다.
+
+   > npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+
+   설치가 되었다면 파일들의 확장자들을 바꿔줘야한다.
+   기존에 .js파일들을 .tsx(ts + react조합)로 바꿔야한다. (그냥 타입스크립트는 .ts 확장자로 쓴다.)
+   변경을 하고 구동중이던 react를 종료한다.
+
+   > clear
+   > npm start
+
+   해보면 타입스크립트가 동작해서 에러들을 뿜뿜하고 있는 걸 확인 할 수 있는데, 기존에 개발한게 js라서 그렇다.
+   props라던지 import된 styled-component들을 변경해야한다.
+
+   > npm i --save-dev @types/styled-components
+
+   styled-component의 경우 위 명령어로 재설치를 하라고 한다.
+   설치가 완료되면 에러가 없어진걸 볼 수 있다.
