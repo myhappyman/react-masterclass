@@ -90,3 +90,17 @@
 
    styled-component의 경우 위 명령어로 재설치를 하라고 한다.
    설치가 완료되면 에러가 없어진걸 볼 수 있다.
+
+   2-2. typescript를 react에서 사용해보기
+   props로 데이터를 전달하는경우 해당 데이터 타입이 무엇인지 정의를 해주어야 타입스크립트가 구분을 한다.
+   background-color와 같은 문자열을 넘길경우 bgColor: string이라는식으로 바로 적어줘도 되지만, 하나의 interface를 만들고
+   props의 object전체를 interface에 상속받아서 타입스크립트를 적용시킬수도 있다.
+
+   컴포넌트의 {}: interface명
+   형태로 입력하면 props들에 대해 정의된 interface값을 상속시켜서 타입스크립트의 값을 정의할 수 있다.
+
+   styled-component의 경우
+   styled.div<interface명>``;
+   위 형태로 <명칭> 으로 입력한다.
+
+   \*interface는 object를 설명해주는것이라고 생각하면 된다.
