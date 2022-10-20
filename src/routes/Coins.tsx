@@ -1,8 +1,11 @@
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 const Container = styled.div`
     padding: 0px 20px;
+    max-width: 480px;
+    margin: 0 auto;
 `;
 
 const Header = styled.header`
@@ -37,47 +40,75 @@ const Title = styled.h1`
     color: ${props => props.theme.accentColor};
 `;
 
-const coins = [{
-    id: "btc-bitcoin",
-    name: "Bitcoin",
-    symbol: "BTC",
-    rank: 1,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-    },
-    {
-    id: "eth-ethereum",
-    name: "Ethereum",
-    symbol: "ETH",
-    rank: 2,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-    },
-    {
-    id: "hex-hex",
-    name: "HEX",
-    symbol: "HEX",
-    rank: 3,
-    is_new: false,
-    is_active: true,
-    type: "token",
-    },];
+const animationLoader = keyframes`
+    0%{
+        color: red;
+    }
+    25%{
+        color: yellow;
+    }
+    50%{
+        color: green;
+    }
+    75%{
+        color: blue;
+    }
+    100%{
+        color: purple;
+    }
+`;
+const Loader = styled.div`
+    font-weight: 700;
+    text-align: center;
+    animation: ${animationLoader} 1s linear infinite;
+`;
+
+interface CoinInterface {
+    id: string,
+    name: string,
+    symbol: string,
+    rank: number,
+    is_new: boolean,
+    is_active: boolean,
+    type: string
+}
 
 function Coins(){
+    const [loading, setLoading] = useState(true);
+    const [coins, setCoins] = useState<CoinInterface[]>([]);
+    /**
+     * useEffect에서 익명함수를 정의하고 ()붙여서 즉시 실행되도록 한다.
+     * 추가로 함수를 작성하는것을 안해도 된다. 
+     */
+    useEffect(() => {
+        (async() => { 
+            const response = await fetch("https://api.coinpaprika.com/v1/coins");
+            const json = await response.json();
+            if(json.length > 100){
+                setCoins(json.slice(0, 100));
+            }else{
+                setCoins(json);
+            }
+            setLoading(false);
+        })();
+    }, []);
+
     return (
         <Container>
             <Header>
                 <Title>코인 리스트</Title>
             </Header>
-            <CoinList>
-                {coins.map(c => (
-                    <Coin key={c.id}>
-                        <Link to={`/${c.id}`}>{c.name} &rarr;</Link>
-                    </Coin>                    
-                ))}                
-            </CoinList>
+            {loading ? <Loader>Loading</Loader> : 
+                (
+                    <CoinList>
+                        {coins.map(c => (
+                            <Coin key={c.id}>
+                                <Link to={`/${c.id}`}>{c.name} &rarr;</Link>
+                            </Coin>                    
+                        ))}                
+                    </CoinList>
+                )
+            }
         </Container>
     );
 }
