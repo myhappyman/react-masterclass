@@ -178,3 +178,6 @@
    2-6-4. index.tsx파일에서 ThemeProvider를 선언하고 theme안에 theme.ts에서 작성한 테마를 불러서 사용한다.
 
    2-6-5. theme값을 사용하고 싶은 .tsx파일로 가서 props를 통해 props.theme.테마로 정의한값을 통해 불러서 사용하면 끝!
+
+3. 지금까지 배운 기능들을 통해 페이지를 만들고 fetch를 통해 데이터를 가져오고 출력하는 기능을 만들어볼것이다.
+   react-query를 통해 fetch를 좀 더 쉽게 사용해볼 예정이다.
