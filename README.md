@@ -125,3 +125,56 @@
    또는 아래와 같이 파라미터상태에서 처리도 가능하다.
    function A({text = "기본 메시지"}){ }
    이것 또한 es6로 기억한다.
+
+   2-4. typescript & state
+   react에서 젤 처음 배운 개념인 state와 typescript를 같이 사용하는법을 배운다.
+   useState(0); 으로 선언하면 해당값은 number로 인식한다.
+   useState(""); 으로 선언하면 해당값은 string으로 인식한다.
+   useState(true); > boolean
+
+   자주 없는케이스이지만 number이면서 string이어야 하는경우는 아래처럼 표현할 수 있다.
+
+   > const [value, setValue] = useState<number|string>(0);
+
+   <> 람다형태로 허용할 타입을 넣어주면 된다.
+
+   2-5. state사용법 2
+   state사용을 위해 onChange onSubmit, onKeypress등등 다양한 이벤트를 처리하고 set함수에 넣어줘야할텐데, 이때 기존의 react와는 조금 다른 형태로 데이터를 처리한다.
+
+   input태그에 onChange를 기준으로 설명하자면 아래와 같다.
+   const onChange = (event: React.FormEvent<HTMLInputElement>) => {}
+
+   파라미터값인 event에 타입은 React문법이면서 Form이벤트가 발생했을 때, 그중에서도 Input이벤트인 경우를 지칭할 수 있다.
+   이것은 다 외우거나 자연스럽게 알 수 있는것은 아니고 구글링을 통해 찾거나 반복숙달을 해야한다. 하단에 관련 url을 참고하면 좋다.
+
+   url: https://reactjs.org/docs/events.html
+   리액트 관련된 이벤트들이 궁금하다면 SyntheticEvent 가이드를 본다.
+
+   set처리부분도 변경된 걸 볼 수 있는데, 기존 react에서는 아래처럼
+   setName(event.target.value);
+   형태로 set함수에 값을 갱신해줬는데,
+
+   setName(event.currentTarget.value);
+   타입스크립트에선 위 형태로 currentTarget이라는걸 타입스크립트에서 채택했다. 차이점은 요정도다.
+
+   또한 object안에서 object의 특정값을 통해 받는법도 알아냈는데, 위 value형태는 아래처럼 표현 할 수도 있다.
+   const {currentTarget:{value}} = event;
+   setName(value); //이것은 event.currentTarget.value를 value상수에 대입 후 setName함수에 넣은것이다.
+
+   2-6. typescript & styled-component : theme
+   참고 url : https://styled-components.com/docs/api#typescript
+
+   2-6-1.타입스크립트가 알아먹을 수 있는 styled-component로 설치
+
+   > npm install @types/styled-components
+
+   설치를하게 되면 index.d.ts 파일이 생성되는데, 타입스크립트에게 styled-component를 설명해준다.
+
+   2-6-2. styled.d.ts를 만든다.(d.ts는 declaration file이라는 뜻이다.)
+
+   2-6-3. theme.ts(테마를 정의할 파일을 만든다.)
+   사용될 값들을 정의해주고 export처리한다.
+
+   2-6-4. index.tsx파일에서 ThemeProvider를 선언하고 theme안에 theme.ts에서 작성한 테마를 불러서 사용한다.
+
+   2-6-5. theme값을 사용하고 싶은 .tsx파일로 가서 props를 통해 props.theme.테마로 정의한값을 통해 불러서 사용하면 끝!
