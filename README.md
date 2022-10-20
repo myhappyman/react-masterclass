@@ -181,3 +181,17 @@
 
 3. 지금까지 배운 기능들을 통해 페이지를 만들고 fetch를 통해 데이터를 가져오고 출력하는 기능을 만들어볼것이다.
    react-query를 통해 fetch를 좀 더 쉽게 사용해볼 예정이다.
+
+   3-1. react-router-dom 설치
+
+   3-2. stlyed component는 전역 css를 적용을 위한 property를 가지고 있는데, 그것이 바로 createGlobalStyle이다.
+   그리고 생성한 컴포넌트를 최상단인 App 맨위에 선언해주는 방식을 택했는데, 이렇게 넣다보면 프로젝트내에 불필요한 div가 많아진다.
+   리액트팀은 이런것을 막히위해 Fragment라는걸 만들었다.
+   유령 컴포넌트로 부모없이 붙어있을수 있도록 만들어준다.
+
+   글로벌 스타일을 적용하게 되면 styled-component가 Document의 head로 찾아가서 해당 내용을 전역에 적용시켜준다.
+
+   google에서 reset css검색하고 첫번째 url의 기본내용을 App.tsx에 적용하여 전역 리셋처리함
+
+   3-3. 폰트 적용
+   폰트또한 import로 지원되는 구글에서 원하는 폰트를 가져와서 reset 최상단에 선언한다. 선언한 폰트를 전역 css에서 body에 걸어준다.
