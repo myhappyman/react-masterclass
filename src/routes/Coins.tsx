@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 
 const Container = styled.div`
@@ -24,9 +24,10 @@ const Coin = styled.li`
     margin-bottom: 10px;
     border-radius: 15px;
     a {
+        display: flex;
+        align-items: center;
         transition: color .5s ease-in;
         padding: 20px;
-        display: block;
     }    
     &:hover {
         a {
@@ -63,6 +64,12 @@ const Loader = styled.div`
     animation: ${animationLoader} 1s linear infinite;
 `;
 
+const CoinImg = styled.img`
+    width: 35px;
+    height: 35px;
+    margin: 0 10px 0 0;
+`;
+
 interface CoinInterface {
     id: string,
     name: string,
@@ -73,9 +80,11 @@ interface CoinInterface {
     type: string
 }
 
+
 function Coins(){
     const [loading, setLoading] = useState(true);
     const [coins, setCoins] = useState<CoinInterface[]>([]);
+
     /**
      * useEffect에서 익명함수를 정의하고 ()붙여서 즉시 실행되도록 한다.
      * 추가로 함수를 작성하는것을 안해도 된다. 
@@ -103,7 +112,10 @@ function Coins(){
                     <CoinList>
                         {coins.map(c => (
                             <Coin key={c.id}>
-                                <Link to={`/${c.id}`}>{c.name} &rarr;</Link>
+                                <Link to={`/${c.id}`} state={c}>
+                                    <CoinImg src={`https://cryptocurrencyliveprices.com/img/${c.id}.png`} />
+                                    {c.name} &rarr;
+                                </Link>
                             </Coin>                    
                         ))}                
                     </CoinList>

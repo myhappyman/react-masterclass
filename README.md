@@ -197,3 +197,36 @@
    폰트또한 import로 지원되는 구글에서 원하는 폰트를 가져와서 reset 최상단에 선언한다. 선언한 폰트를 전역 css에서 body에 걸어준다.
 
    3-4. fetch등으로 데이터를 가져올때도 typescript한테 타입을 알려줘야한다.
+
+   3-5. 이미 출력된 리스트에서 name값을 알고 데이터를 아는데,
+   상세 페이지로 이동하면서 또 로딩을 보여주는건 좋지 않은 개발 방식이다.
+   이미 데이터를 브라우저가 애초에 가지고 있기때문에, 보이지 않는 방식으로 데이터를 어떻게 보내는지 알아본다.(비하인드더씬 방식)
+   데이터를 넘길때 보통 paramter를 넘기는데, 이것 말고 state를 활용하여 처리할 수 있다. (비하인드더씬의 소통방식)
+
+   React Router dom에 있는 Link 컴포넌트는 2가지 옵션이 있다.
+   to속성에 string인 일반 문자열로 경로를 넣는것.
+
+   두번째는 object를 사용할 수 있다.
+   <Link 
+      to={{
+         pathname: "/course",
+         search: "?sort=name",
+         hash: "#the-hash",
+         state: {fromDashboard: true}
+      }}
+   />
+
+   다만 해당 문법도 react-router 6이상부터 변경되어 object형태가 아닌
+   각각 속성별로 적어준다.
+   <Link to={"/"} state={name:"psw"}>
+
+   설정해주고 state에 넘긴 데이터는 어떻게 받을까?
+   받아야하는 페이지에서 useLoaction()을 통해서 데이터를 받아오면 된다.
+
+   interface LocationState{
+   state:{
+   name: string,
+   rank: number
+   }
+   }
+   const {state} = useLoaction() as LocationState;
