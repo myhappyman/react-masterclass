@@ -230,3 +230,9 @@
    }
    }
    const {state} = useLoaction() as LocationState;
+
+   3-6. 상세페이지 작업
+   state를 통해 넘긴 coinId, state값등을 활용하여 상세페이지를 꾸미고 출력한다.
+   async, await, fetch조합으로 coin정보와, 가격정보를 request한다.
+   여기서 state에 값을 담아줘야하는데, state값은 단일 정보이다 보니 object형태일 것이다.
+   타입스크립트는 각 object의 값이 무엇인지 설명해줘야하는데, 이것은 타입스크립트를 쓰면서 귀찮은 점 중 하나가 된다.
