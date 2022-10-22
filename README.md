@@ -236,3 +236,25 @@
    async, await, fetch조합으로 coin정보와, 가격정보를 request한다.
    여기서 state에 값을 담아줘야하는데, state값은 단일 정보이다 보니 object형태일 것이다.
    타입스크립트는 각 object의 값이 무엇인지 설명해줘야하는데, 이것은 타입스크립트를 쓰면서 귀찮은 점 중 하나가 된다.
+
+   3-7. 이전장에서 문제였던 object의 각 데이터를 typescript에게 설명해주는 부분을 작성해본다. 처리를 안해주면 useState의 object 기본값때문에 계속 빈 object로 인식하기 때문이다.
+
+   interface정의를 할때 명칭은 대문자 I를 붙여주는 규칙을 사용하면 좋다.
+   interface정의를 조금 쉽게할 수 있는 팁이 있는데, 처리하고자 하는 object를 console.log로 출력하고 콘솔창에서 해당 값의 오른쪽클릭 후 Store object as global variable을 클릭하면, 전역 변수에 해당 값을 담아주는데, 이걸 Object.keys를 통해 처리하면 key에 대한 array를 받을 수 있다. 이걸 join()메소드로 처리하면 하나의 문자열로 붙여준다. Object.keys(temp1).join();
+   (으... 신규 프로젝트 들어가서 db스키마를 보고 java에서 VO 또는 mybatis 작성하는 기분이다...)
+
+   이렇게 key값들은 불러왔고, 각 key의 타입을 불러와야하는데, 이번엔 Object.values(temp1).map(v=> typeof v).join()로 가져온다.
+   각 문자열을의 쉼표를 제거하고 엔터로 한줄로 만들어서 복사 한 후
+   먼저 세팅한 키값: ; 을 전체 선택하고 shift alt i 를 눌러서 맨 우측으로 포커싱하고 : ;사이에 커서를 둔 후 붙여넣기를 하면 끝!
+   엄청난 꿀팁이다...
+
+   하지만 해당 방법이 완벽한건 아니다 [{...}, {...}, ...]
+   형태의 array타입안에 object로 이루어진 값인데 object타입이라고 적힐때도 있다.
+   이러한 경우 array내부의 object를 설명할 interface를 만들고
+   tag: ITag[];
+   위 형태로 추가로 또 처리해줘야한다.(복잡하면... 알아볼 수 있을까..허헣)
+
+   -vscode 단축키
+   ctrl + d : 같은 문자열 선택
+   전체 선택 후 > shift + alt + i : 선택한 문자열 맨 우측으로 포커싱
+   ctrl + shift + -> : 현재 선택한 문자열 기준으로 우측끝까지 선택
