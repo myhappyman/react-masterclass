@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import {Routes, Route} from "react-router-dom";
 import {useParams, useLocation} from "react-router";
 import styled, {keyframes} from "styled-components";
+import Chart from "./Chart";
+import Price from "./Price";
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -174,30 +177,34 @@ const Description = styled.p`
         {loading ? <Loader>Loading</Loader> : 
         <>
             <Overview>
-            <OverviewItem>
-                <span>Rank:</span>
-                <span>{info?.rank}</span>
-            </OverviewItem>
-            <OverviewItem>
-                <span>Symbol:</span>
-                <span>${info?.symbol}</span>
-            </OverviewItem>
-            <OverviewItem>
-                <span>Open Source:</span>
-                <span>{info?.open_source ? "Yes" : "No"}</span>
-            </OverviewItem>
+                <OverviewItem>
+                    <span>Rank:</span>
+                    <span>{info?.rank}</span>
+                </OverviewItem>
+                <OverviewItem>
+                    <span>Symbol:</span>
+                    <span>${info?.symbol}</span>
+                </OverviewItem>
+                <OverviewItem>
+                    <span>Open Source:</span>
+                    <span>{info?.open_source ? "Yes" : "No"}</span>
+                </OverviewItem>
             </Overview>
             <Description>{info?.description}</Description>
             <Overview>
-            <OverviewItem>
-                <span>Total Suply:</span>
-                <span>{priceInfo?.total_supply}</span>
-            </OverviewItem>
-            <OverviewItem>
-                <span>Max Supply:</span>
-                <span>{priceInfo?.max_supply}</span>
-            </OverviewItem>
+                <OverviewItem>
+                    <span>Total Suply:</span>
+                    <span>{priceInfo?.total_supply}</span>
+                </OverviewItem>
+                <OverviewItem>
+                    <span>Max Supply:</span>
+                    <span>{priceInfo?.max_supply}</span>
+                </OverviewItem>
             </Overview>
+            <Routes>
+                <Route path="chart" element={<Chart />} />
+                <Route path="price" element={<Price />} />
+            </Routes>
         </>}
     </Container>
     );

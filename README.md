@@ -259,6 +259,23 @@
    전체 선택 후 > shift + alt + i : 선택한 문자열 맨 우측으로 포커싱
    ctrl + shift + -> : 현재 선택한 문자열 기준으로 우측끝까지 선택
 
+   object에서 optional chaining인 '?.'
+   key?.key 안에 ?.로 이어주면 ?.앞에 key값이 undefined가 아니라면 데이터를 가져와서 호출해준다.
+
    3-8. Nested router or nested route
    route안에 있는 route이다.
    웹 사이트에서 탭을 사용할때 많이 도와줄 것이다.
+   먼저 가격정보와 차트정보를 보여줄 탭 기능을 만들것인데, 개발하기 나름인지라 state에 값을 넣어서 change이벤트를 활용해서 처리할 수도 있지만 url에 따라 분기하는것이 좀 더 효율적이다. 사용자가 url을 치고 바로 들어오는 경우에도 제공하기 위함이다.
+
+   v6버전으로 오르고 nested router를 사용하기 위해선 설정이 좀 필요하다.
+   -Router.tsx
+   기존 "/:coinId"
+   변경 "/:coinId/\*"
+
+   -Coin.tsx
+   <Routes>
+   <Route path="chart" element={<Chart />} />
+   <Route path="price" element={<Price />} />
+   </Routes>
+
+   상대경로로 적어주면 알아서 "/coinId값/chart", "/coinId값/price"값에 맞춰서 페이지를 보여준다.
