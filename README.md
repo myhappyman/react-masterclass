@@ -317,3 +317,14 @@
 
    코인 리스트를 불러내고 상세페이지를 갔다가 되돌아오면 이전처럼 로딩이 뜨지 않고 바로 리스트가 출력되는 걸 볼 수 있다.
    이렇게 된 이유는 react query가 data를 캐시에 저장해두기 때문이다.
+
+   3-11. react-query, react-query/devtools
+
+   react-query는 데이터를 캐싱하고 있기때문에 쿼리형태로 어떤 데이터를 가지고 있는지 알수가 있다.
+
+   이것을 디버깅 하도록 도와주는 컴포넌트가 있는데 아래와 같다.
+   App.tsx
+   import { ReactQueryDevtools } from "react-query/devtools";
+   <ReactQueryDevtools initialIsOpen={true} />
+
+   이후부터는 새로운 UI가 추가된 모습을 볼 수 있고 각 옵션과 설정한 값에 따라 어떤 데이터가 캐싱되고 있는지 볼 수 있을것이다.
