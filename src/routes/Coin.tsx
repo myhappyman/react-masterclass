@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import {Routes, Route} from "react-router-dom";
-import {useParams, useLocation} from "react-router";
+import {Link} from "react-router-dom";
+import {Routes, Route, useParams, useLocation, useMatch} from "react-router";
 import styled, {keyframes} from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
@@ -142,7 +142,26 @@ const Description = styled.p`
   margin: 20px 0px;
 `;
 
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0px;
+  gap: 10px;
+`;
 
+const Tab = styled.span<{isActive: boolean}>`
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 7px 0px;
+  border-radius: 10px;
+  color : ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
+  a {
+    display: block;
+  }
+`;
 
 /**
  * router-dom 6버전 이상부터 useParams는
@@ -158,6 +177,8 @@ const Description = styled.p`
     const {state} = useLocation() as LocationState;
     const [info, setInfo] = useState<IInfoData>();
     const [priceInfo, setPriceInfo] = useState<IPriceData>();
+    const priceMatch = useMatch("/:coindId/price");
+    const chartMatch = useMatch("/:coindId/chart");
     useEffect(()=> {
         (async ()=> {
             const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
@@ -201,6 +222,17 @@ const Description = styled.p`
                     <span>{priceInfo?.max_supply}</span>
                 </OverviewItem>
             </Overview>
+
+            <Tabs>
+                <Tab isActive={priceMatch != null ? true : false}>
+                    <Link to={`price`}>Price</Link>
+                </Tab>
+                <Tab isActive={chartMatch != null ? true : false}>
+                    <Link to={`chart`}>Chart</Link>
+                </Tab>
+            </Tabs>
+            
+
             <Routes>
                 <Route path="chart" element={<Chart />} />
                 <Route path="price" element={<Price />} />

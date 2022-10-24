@@ -279,3 +279,11 @@
    </Routes>
 
    상대경로로 적어주면 알아서 "/coinId값/chart", "/coinId값/price"값에 맞춰서 페이지를 보여준다.
+
+   3-9. 이번 장에서는 url을 직접 수정하는게 아닌 탭 클릭에 따른 nested router의 동작을 해볼 예정이다.
+   지금 같은 경우는 nested router이기 때문에 click이벤트 등은 필요없고 그저 URL만 바꿔주면 되는데 Link 컴포넌트를 사용하면 된다.
+   (a태그는 새로고침이 되기때문에 사용하면 안됨.)
+
+   v6 이후
+   useRouteMatch => useMatch로 hook이름이 변경됨
+   useMatch는 특정한 URL에 있는지 여부를 알려준다.
