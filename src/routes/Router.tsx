@@ -1,8 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Chart from "./Chart";
 import Coin from "./Coin";
 import Coins from "./Coins";
-import Price from "./Price";
 
 /**
  * react 6버전 이상부턴 declare관련 설치를 하지 않아도 알아서 타입스크립트가 알아본다.

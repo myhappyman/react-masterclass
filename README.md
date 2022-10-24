@@ -287,3 +287,33 @@
    v6 이후
    useRouteMatch => useMatch로 hook이름이 변경됨
    useMatch는 특정한 URL에 있는지 여부를 알려준다.
+
+   3-10. react-query
+   react 18버전 이상부터 ts에서 설치법
+
+   > npm i @tanstack/react-query
+
+   index.tsx
+   QueryClientProvider로 감싸주고 client props가 필요하다
+   index는 그렇게 한번만 설정해주고 실제로 처리하는부분에서 사용하면 된다.
+
+   react-query를 쓰게 되면 우리가 실행하고 있던 로직들을 축약해준다.
+   첫번째로 사용하기 위해서 fetcher 함수를 만들어줘야한다.
+   fetcher함수는 fetch promise를 꼭 return해줘야 한다.
+
+   api.ts파일에서 코인리스트를 불러오는 예전 방식의 fetch then메소드로
+   데이터를 불러오고 json으로 return 시킨 후 coins.tsx에서는 useQuery를 hook을 사용하였다.
+
+   useQuery 에는 2가지 args가 있는데 첫번째는 고유식별자값이다.
+   두번째는 fetcher함수로 아까 만든 api.ts에서 호출해온다.
+   여기서 첫번째인 식별자는 []인 array string형태로 입력한다.
+
+   useQuery를 쓰면 결과로 전달해주는 값들은 정해져있는데, 이중에서 isLoading과 data값을 확인해보았다.
+   데이터를 가져오는 중이면 isLoading에 true
+   데이터를 다 가져오면 false처리가 되고, fetch로 가져온 json데이터는
+   data에 담긴다.
+
+   이것을 통해 기존에 useEffect에서 async await fetch를 하고 state에 담고 했던 복잡한 작업을 간단하고 모듈화를 해서 재사용성을 높일 수 있다.
+
+   코인 리스트를 불러내고 상세페이지를 갔다가 되돌아오면 이전처럼 로딩이 뜨지 않고 바로 리스트가 출력되는 걸 볼 수 있다.
+   이렇게 된 이유는 react query가 data를 캐시에 저장해두기 때문이다.

@@ -1,8 +1,6 @@
-import { useQuery } from "react-query";
-// import {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import styled, {keyframes} from "styled-components";
-import { fetchCoins } from "../api";
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -84,28 +82,25 @@ interface ICoin {
 
 
 function Coins(){
-    // const [loading, setLoading] = useState(true);
-    // const [coins, setCoins] = useState<ICoin[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [coins, setCoins] = useState<ICoin[]>([]);
 
-    // /**
-    //  * useEffect에서 익명함수를 정의하고 ()붙여서 즉시 실행되도록 한다.
-    //  * 추가로 함수를 작성하는것을 안해도 된다. 
-    //  */
-    // useEffect(() => {
-    //     (async() => { 
-    //         const response = await fetch("https://api.coinpaprika.com/v1/coins");
-    //         const json = await response.json();
-    //         if(json.length > 100){
-    //             setCoins(json.slice(0, 100));
-    //         }else{
-    //             setCoins(json);
-    //         }
-    //         setLoading(false);
-    //     })();
-    // }, []);
-
-    //react-query버전으로 변경!
-    const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
+    /**
+     * useEffect에서 익명함수를 정의하고 ()붙여서 즉시 실행되도록 한다.
+     * 추가로 함수를 작성하는것을 안해도 된다. 
+     */
+    useEffect(() => {
+        (async() => { 
+            const response = await fetch("https://api.coinpaprika.com/v1/coins");
+            const json = await response.json();
+            if(json.length > 100){
+                setCoins(json.slice(0, 100));
+            }else{
+                setCoins(json);
+            }
+            setLoading(false);
+        })();
+    }, []);
 
 
     return (
@@ -113,10 +108,10 @@ function Coins(){
             <Header>
                 <Title>코인 리스트</Title>
             </Header>
-            {isLoading ? <Loader>Loading</Loader> : 
+            {loading ? <Loader>Loading</Loader> : 
                 (
                     <CoinList>
-                        {data?.slice(0, 100).map(c => (
+                        {coins?.map(c => (
                             <Coin key={c.id}>
                                 <Link to={`/${c.id}`} state={c}>
                                     <CoinImg src={`https://cryptocurrencyliveprices.com/img/${c.id}.png`} />
