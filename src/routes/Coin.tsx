@@ -200,6 +200,8 @@ const Tab = styled.span<{isActive: boolean}>`
         data:tickersData} = useQuery(["tickers", coinId], () => fetchCoinTickerInfo(`${coinId}`));
 
     const loading = infoLoading || tickersLoading;
+
+    console.log(coinId)
     return (
     <Container>
         <Header>
@@ -244,8 +246,10 @@ const Tab = styled.span<{isActive: boolean}>`
             
 
             <Routes>
-                <Route path="chart" element={<Chart />} />
-                <Route path="price" element={<Price />} />
+                <Route path="chart" 
+                    element={<Chart coinId={coinId as string}/>} />
+                <Route path="price" 
+                    element={<Price />} />
             </Routes>
         </>}
     </Container>

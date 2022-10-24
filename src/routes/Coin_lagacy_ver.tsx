@@ -234,8 +234,8 @@ const Tab = styled.span<{isActive: boolean}>`
             
 
             <Routes>
-                <Route path="chart" element={<Chart />} />
-                <Route path="price" element={<Price />} />
+                {/* <Route path="chart" element={<Chart />} />
+                <Route path="price" element={<Price />} /> */}
             </Routes>
         </>}
     </Container>
