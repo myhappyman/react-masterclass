@@ -328,3 +328,35 @@
    <ReactQueryDevtools initialIsOpen={true} />
 
    이후부터는 새로운 UI가 추가된 모습을 볼 수 있고 각 옵션과 설정한 값에 따라 어떤 데이터가 캐싱되고 있는지 볼 수 있을것이다.
+
+   3-12. react에서 apexChart를 사용하여 적용하였다.
+   url: https://apexcharts.com/docs/installation/#
+
+   > npm install apexcharts --save
+
+   npm명령어로 설치 후
+
+   사용할 컴포넌트부분에서 import ApexCharts from 'apexcharts'
+   import를하고 사용하면 된다.
+
+   리액트 문법 사용하여 생성할 apexChart 컴포넌트를 만들고
+   원하는 옵션을 props형태로 넣어주면 알아서 동작한다.
+
+   3-13. useQuery 3번쨰 parameter
+   3번쨰 파라미터에는 옵션을 넣어줄 수 있는데, 다양한 옵션 중
+   refetch시간을 정할 수 있다.
+   이 시간을 정하게 되면 특정 시간마다 데이터를 새로 fetch해와서 데이터를 갱신해주고 실시간성을 보장해주게 된다.
+
+   3-14. react helmet
+
+   > npm install react-helmet
+
+   설치 후 사용하면 된다.
+   리액트 헬맷은 컴포넌트로 무엇을 render하던 문서의 head로 가게해준다.
+
+   > npm i --save-dev @types/react-helmet
+
+   타입스크립트 버전이라면 위 명령어로 설치
+   이후 HelMet컴포넌트 안에 원하는 head태그를 입력하면 알아서 적용이 된다.
+   <Helmet><title>제목이 바뀐다.</title></Helmet>
+   title 외에도 favicon이나 css를 넣을수도 있고 meta태그등 다 건들수가 있다.

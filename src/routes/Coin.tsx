@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import {Routes, Route, useParams, useLocation, useMatch} from "react-router";
 import styled, {keyframes} from "styled-components";
@@ -197,12 +198,21 @@ const Tab = styled.span<{isActive: boolean}>`
     const {isLoading: infoLoading, 
         data:infoData} = useQuery(["info", coinId], () => fetchCoinInfo(`${coinId}`));
     const {isLoading: tickersLoading, 
-        data:tickersData} = useQuery(["tickers", coinId], () => fetchCoinTickerInfo(`${coinId}`));
+        data:tickersData} = useQuery(
+            ["tickers", coinId], 
+            () => fetchCoinTickerInfo(`${coinId}`),
+            { //3번째 파라미터는 option을 넣을수 있다.
+                refetchInterval: 5000 //해당 쿼리를 5초마다 refetch하도록 설정
+            }
+        );
 
     const loading = infoLoading || tickersLoading;
 
     return (
     <Container>
+        <Helmet>
+            <title>{state ? state.name : loading ? <span>Loading</span> : infoData?.name}</title>
+        </Helmet>
         <Header>
             <Title>{state ? state.name : loading ? <Loader>Loading</Loader> : infoData?.name}</Title>
         </Header>
@@ -218,8 +228,8 @@ const Tab = styled.span<{isActive: boolean}>`
                     <span>${infoData?.symbol}</span>
                 </OverviewItem>
                 <OverviewItem>
-                    <span>Open Source:</span>
-                    <span>{infoData?.open_source ? "Yes" : "No"}</span>
+                    <span>Price:</span>
+                    <span>${tickersData?.quotes.USD.price.toFixed(2)}</span>
                 </OverviewItem>
             </Overview>
             <Description>{infoData?.description}</Description>
