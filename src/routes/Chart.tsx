@@ -54,8 +54,24 @@ function Chart({coinId}:ChartProps){
                         labels: {show: false},
                         axisTicks: {show: false},
                         axisBorder: {show: false},
+                        type: "datetime",
+                        categories: data?.map((d => new Date(d.time_close * 1000).toUTCString())) ?? [],
+                    },
+                    fill: {
+                        type:"gradient",
+                        gradient: {
+                            gradientToColors: ["#16a085"],
+                            stops: [0, 100],
+                        },
+                        
+                    },
+                    colors: ["#3498db"],
+                    tooltip: {
+                        y: {
+                            formatter: (value) => `$ ${value.toFixed(2)}`
+                        }
                     }
-
+                    
                 }}
 
                 

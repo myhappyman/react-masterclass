@@ -201,7 +201,6 @@ const Tab = styled.span<{isActive: boolean}>`
 
     const loading = infoLoading || tickersLoading;
 
-    console.log(coinId)
     return (
     <Container>
         <Header>
