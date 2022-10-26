@@ -4,26 +4,6 @@ import { fetchCoinTickerInfo } from "../api";
 import Loader from "../components/Loader";
 import {AiOutlineFall, AiOutlineRise} from "react-icons/ai";
 
-interface IPrice{
-    price: number;
-    volume_24h: number;
-    volume_24h_change_24h: number;
-    market_cap: number;
-    market_cap_change_24h: number;
-    percent_change_15m: number;
-    percent_change_30m: number;
-    percent_change_1h: number;
-    percent_change_6h: number;
-    percent_change_12h: number;
-    percent_change_24h: number;
-    percent_change_7d: number;
-    percent_change_30d: number;
-    percent_change_1y: number;
-    ath_price: number;
-    ath_date: string;
-    percent_from_price_ath: number;
-}
-
 interface PriceProps{
     coinId: string;
 }
@@ -85,7 +65,6 @@ const Value = styled.div<{pointColor:string}>`
     }
 `;
 
-
 function Price({coinId}:PriceProps){
     const {isLoading, data} = useQuery(
         ["priceInfo", coinId],
@@ -99,13 +78,12 @@ function Price({coinId}:PriceProps){
     );
     
     const pointColor = (value:number):string => {
-        return value == 0 ? "black" : value < 0 ? "green" : "red";
+        return value === 0 ? "black" : value < 0 ? "green" : "red";
     }
 
     const pointArrow = (value:number):JSX.Element => {
-        return value == 0 ? <div></div> : value < 0 ? <AiOutlineFall className="arrow"/> : <AiOutlineRise className="arrow"/>;
+        return value === 0 ? <div></div> : value < 0 ? <AiOutlineFall className="arrow"/> : <AiOutlineRise className="arrow"/>;
     }
-    
 
     return (
         <div>
