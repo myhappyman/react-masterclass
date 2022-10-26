@@ -7,6 +7,8 @@ import styled, {keyframes} from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
 import { fetchCoinInfo, fetchCoinTickerInfo } from "../api";
+import Loader from "../components/Loader";
+import { AiOutlineMenu } from "react-icons/ai"
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -26,28 +28,67 @@ const Title = styled.h1`
     color: ${props => props.theme.accentColor};
 `;
 
-const animationLoader = keyframes`
-    0%{
-        color: red;
-    }
-    25%{
-        color: yellow;
-    }
-    50%{
-        color: green;
-    }
-    75%{
-        color: blue;
-    }
-    100%{
-        color: purple;
-    }
+const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: ${props => props.theme.boxBgColor};
+  padding: 10px 20px;
+  border-radius: 10px;
 `;
 
-const Loader = styled.div`
-    font-weight: 700;
-    text-align: center;
-    animation: ${animationLoader} 1s linear infinite;
+const OverviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+    background-color: ${props => props.theme.boxBgColor};
+    margin: 20px 0px;
+    padding: 20px;
+    border-radius: 20px;
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.span<{isActive: boolean}>`
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: ${props => props.theme.boxBgColor};
+  padding: 7px 0px;
+  border-radius: 10px;
+  color : ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
+  a {
+    display: block;
+  }
+`;
+
+const BackBtn = styled.div`
+    display: flex;
+    margin: 20px;
+    justify-content: right;
+    color: ${props => props.theme.textColor};
+    font-size: 28px;
+    .list{
+        margin: 0 0 -3px;
+    }
+    &:hover{
+        transition: .3s linear;
+        color: ${props => props.theme.accentColor}
+    }
 `;
 
 interface LocationState{
@@ -121,51 +162,6 @@ interface IPriceData{
     }
 }
 
-const Overview = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-`;
-
-const OverviewItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-`;
-
-const Description = styled.p`
-  margin: 20px 0px;
-`;
-
-const Tabs = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 25px 0px;
-  gap: 10px;
-`;
-
-const Tab = styled.span<{isActive: boolean}>`
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
-  border-radius: 10px;
-  color : ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
-  a {
-    display: block;
-  }
-`;
-
 /**
  * router-dom 6버전 이상부터 useParams는
  * 타입스크립트에서 알아서 string | undefined로 인식하기때문에
@@ -211,12 +207,13 @@ const Tab = styled.span<{isActive: boolean}>`
     return (
     <Container>
         <Helmet>
-            <title>{state ? state.name : loading ? <span>Loading</span> : infoData?.name}</title>
+            <title>{state ? state.name : loading ? "loading" : infoData?.name}</title>
         </Helmet>
         <Header>
-            <Title>{state ? state.name : loading ? <Loader>Loading</Loader> : infoData?.name}</Title>
+            <Title>{state ? state.name : loading ? <Loader /> : infoData?.name}</Title>
         </Header>
-        {loading ? <Loader>Loading</Loader> : 
+        <BackBtn><Link to={"/"}><AiOutlineMenu className="list" /> List</Link></BackBtn>
+        {loading ? <Loader /> : 
         <>
             <Overview>
                 <OverviewItem>
@@ -258,7 +255,7 @@ const Tab = styled.span<{isActive: boolean}>`
                 <Route path="chart" 
                     element={<Chart coinId={coinId as string}/>} />
                 <Route path="price" 
-                    element={<Price />} />
+                    element={<Price coinId={coinId as string}/>} />
             </Routes>
         </>}
     </Container>

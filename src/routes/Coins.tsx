@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import {Link} from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 import { fetchCoins } from "../api";
+import Loader from "../components/Loader";
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -22,11 +23,12 @@ const CoinList = styled.ul`
 `;
 
 const Coin = styled.li`
-    background-color: white;
+    background-color: ${props => props.theme.textColor};
     color: ${props => props.theme.bgColor};
     margin-bottom: 10px;
     border-radius: 15px;
     a {
+        color: ${props => props.theme.bgColor};
         display: flex;
         align-items: center;
         transition: color .5s ease-in;
@@ -42,29 +44,6 @@ const Coin = styled.li`
 const Title = styled.h1`
     font-size: 48px;
     color: ${props => props.theme.accentColor};
-`;
-
-const animationLoader = keyframes`
-    0%{
-        color: red;
-    }
-    25%{
-        color: yellow;
-    }
-    50%{
-        color: green;
-    }
-    75%{
-        color: blue;
-    }
-    100%{
-        color: purple;
-    }
-`;
-const Loader = styled.div`
-    font-weight: 700;
-    text-align: center;
-    animation: ${animationLoader} 1s linear infinite;
 `;
 
 const CoinImg = styled.img`
@@ -117,7 +96,7 @@ function Coins(){
             <Header>
                 <Title>코인 리스트</Title>
             </Header>
-            {isLoading ? <Loader>Loading</Loader> : 
+            {isLoading ? <Loader /> : 
                 (
                     <CoinList>
                         {data?.slice(0, 100).map(c => (

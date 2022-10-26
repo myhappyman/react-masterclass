@@ -1,6 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { useState } from "react";
 import Router from "./routes/Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { defaultTheme, whiteTheme } from "./theme";
+import { VscColorMode } from "react-icons/vsc";
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -66,12 +69,40 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const ThemeBtn = styled.div`
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 35px;
+    .icon{
+      transition: .3s linear;
+      width: 100%;
+      height: 100%;
+    }
+    &:hover{
+      color: ${props => props.theme.accentColor}
+    }
+`;
+
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const changeTheme = () => {
+    setDarkMode(!darkMode);
+  }
+
+  
   return (
     <>
+    <ThemeProvider theme={darkMode ? defaultTheme : whiteTheme}>
       <GlobalStyle />
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeBtn>
+        <VscColorMode className="icon" onClick={changeTheme}/>
+      </ThemeBtn>
+    </ThemeProvider>
     </>
   );
 }
