@@ -89,20 +89,20 @@ const ThemeBtn = styled.div`
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const changeTheme = () => {
-    setDarkMode(!darkMode);
+    setDarkMode(darkMode => !darkMode);
   }
 
   
   return (
     <>
-    <ThemeProvider theme={darkMode ? defaultTheme : whiteTheme}>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
-      <ThemeBtn>
-        <VscColorMode className="icon" onClick={changeTheme}/>
-      </ThemeBtn>
-    </ThemeProvider>
+      <ThemeProvider theme={darkMode ? defaultTheme : whiteTheme}>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+        <ThemeBtn>
+          <VscColorMode className="icon" onClick={changeTheme}/>
+        </ThemeBtn>
+      </ThemeProvider>
     </>
   );
 }
