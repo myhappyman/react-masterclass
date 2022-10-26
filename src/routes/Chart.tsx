@@ -17,6 +17,7 @@ interface IHistroical{
 
 interface ChartProps {
     coinId: string;
+    darkMode: boolean;
 }
 
 const Tabs = styled.div`
@@ -49,7 +50,7 @@ interface ICandleData{
     goals?: any;
 }
 
-function Chart({coinId}:ChartProps){
+function Chart({coinId, darkMode}:ChartProps){
     const {isLoading, data} = useQuery<IHistroical[]>(
         ["ohlcv", coinId], 
         ()=> fetchCoinHistory(coinId),
@@ -80,7 +81,7 @@ function Chart({coinId}:ChartProps){
                     <Tab onClick={changeMode} isLine={isLine ? false : true}>Candlestick</Tab>
                 </Tabs>
                 {
-                    isLine ? 
+                    isLine && data ? 
                         <ApexChart 
                             type="line"
                             series={[
@@ -91,7 +92,7 @@ function Chart({coinId}:ChartProps){
                             ]}
                             options={{
                                 theme: {
-                                    mode:"dark"
+                                    mode: darkMode ? "dark" : "light"
                                 },
                                 chart: {
                                     height: 300,
@@ -131,13 +132,13 @@ function Chart({coinId}:ChartProps){
                                 }                        
                             }}                    
                         />
-                    :
+                    : data ?
                         <ApexChart 
                             type="candlestick"
                             series={[{ data:candleData ?? [] }]}
                             options={{
                             theme: {
-                                mode: "dark",
+                                mode: darkMode ? "dark" : "light"
                             },
                             chart: {
                                 type: "candlestick",
@@ -174,6 +175,7 @@ function Chart({coinId}:ChartProps){
                             }
                             }}                  
                         />
+                    : null
                 }
                 
             </>

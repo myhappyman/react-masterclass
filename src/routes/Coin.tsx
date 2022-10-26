@@ -161,6 +161,10 @@ interface LocationState{
 //     }
 // }
 
+interface ICoin{
+    darkMode: boolean;
+}
+
 /**
  * router-dom 6버전 이상부터 useParams는
  * 타입스크립트에서 알아서 string | undefined로 인식하기때문에
@@ -169,7 +173,7 @@ interface LocationState{
  * Coin에 대한 상세페이지를 표현하는 컴포넌트
  * @returns 
  */
- function Coin(){
+ function Coin({darkMode}:ICoin){
     const {coinId} = useParams();
     const {state} = useLocation() as LocationState;
     const priceMatch = useMatch("/:coindId/price");
@@ -252,7 +256,7 @@ interface LocationState{
 
             <Routes>
                 <Route path="chart" 
-                    element={<Chart coinId={coinId as string}/>} />
+                    element={<Chart darkMode={darkMode} coinId={coinId as string}/>} />
                 <Route path="price" 
                     element={<Price coinId={coinId as string}/>} />
             </Routes>

@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
 
 const ThemeBtn = styled.div`
     position: fixed;
-    bottom: 40px;
+    top: 40px;
     right: 40px;
     width: 40px;
     height: 40px;
@@ -92,12 +92,11 @@ function App() {
     setDarkMode(darkMode => !darkMode);
   }
 
-  
   return (
     <>
       <ThemeProvider theme={darkMode ? defaultTheme : whiteTheme}>
         <GlobalStyle />
-        <Router />
+        <Router darkMode={darkMode} />
         <ReactQueryDevtools initialIsOpen={true} />
         <ThemeBtn>
           <VscColorMode className="icon" onClick={changeTheme}/>
