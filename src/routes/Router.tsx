@@ -10,13 +10,13 @@ function Router(){
     <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
             <Route
-                path={`${process.env.PUBLIC_URL}/:coinId/*`}
+                path={`/:coinId/*`}
                 element={<Coin/>}
             />
         </Routes>
         <Routes>
             <Route
-                path={`${process.env.PUBLIC_URL}/`}
+                path={`/`}
                 element={<Coins/>}
             />
         </Routes>
