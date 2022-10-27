@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { defaultTheme, whiteTheme } from "./theme";
 import { VscColorMode } from "react-icons/vsc";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
@@ -89,7 +89,10 @@ const ThemeBtn = styled.div`
 
 function App() {
   
-  const isDark = useRecoilValue(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom); //atom의 value를 가져온다.
+  const setIsDark = useSetRecoilState(isDarkAtom); //function을 가져와서 value를 바꿔준다.
+  //useSetRecoilState는 recoil의 state값을 업데이트 할 수 있는 setter함수를 반환시켜줍니다.
+  const toggleDarkAtom = () => setIsDark(prev => !prev);
 
   return (
     <>
@@ -97,7 +100,7 @@ function App() {
         <GlobalStyle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
-        <ThemeBtn>
+        <ThemeBtn onClick={toggleDarkAtom} >
           <VscColorMode className="icon" />
         </ThemeBtn>
       </ThemeProvider>

@@ -408,4 +408,12 @@
    return (<>...</>);
    }
 
-   이를 통해 더이상 props로 전달에 전달에 전달이 아닌 전역 state를 사용할 수 있게 되었다. 다음장에선 해당 값을 변경하는걸 알아본다.
+   이를 통해 더이상 props로 전달에 전달에 전달이 아닌 전역 state를 사용할 수 있게 되었다.
+
+   3-17. recoil state 값 제어하기
+   useRecoilValue 를 사용하여 global state인 atom에 정의된 state값을 가져왔다.
+   useSetRecoilState 는 atom에 정의된 global state의 값을 바꾸는 set함수를 반환한다.
+   사용법은 useState의 2번째 인자였던 set함수와 동일하다.
+   isDark가 있었고, setIsDark함수를 받아서
+   setIsDark(prev => !prev); 함수를 만들어서 이벤트에 넣어주면?
+   바로 토글 테마 기능이 동작해버린다... redux는 어려웠던 기억이 있는데 너무 간결하고 좋다.
