@@ -385,3 +385,27 @@
    지금이야 학습용이고 복잡하지 않은 수준이지만 엄청 큰 프로젝트에서 수정사항이 발생하거나 작업을 하려고하면 엄두가 안날것이다.
 
    계층 구조로 작성되는 리액트의 특징상 모두가 확인해야 하는 state의 값이 있다면 매우 불편해지는데 이런 계층 구조를 무시하고 특정 비누방울에 담아서 모두가 접글할 수 있도록 하는게 state management이다.
+
+   > npm install recoil
+
+   설치 후 recoil설정 파일을 생성한다. recoil에서 비눗방울처럼 특정 전역 state영역을 atom이라고 부른다.
+
+   atoms.ts를 생성하고
+   import { atom } from "recoil";
+
+   export const isDarkAtom = atom({
+   key: "isDark",
+   default: true,
+   });
+
+   해당 소스면 isDarkAtom이라는 global state가 생성된거고 필요한 컴포넌트에서 불러서 쓰면 된다.
+   해당 atom을 부르는 방법은 아래와 같다.
+   import { useRecoilValue } from "recoil";
+   import { isDarkAtom } from "./atoms";
+
+   function App(){
+   const isDark = useRecoilValue(isDarkAtom);
+   return (<>...</>);
+   }
+
+   이를 통해 더이상 props로 전달에 전달에 전달이 아닌 전역 state를 사용할 수 있게 되었다. 다음장에선 해당 값을 변경하는걸 알아본다.

@@ -1,9 +1,10 @@
-import { useState } from "react";
 import Router from "./routes/Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { defaultTheme, whiteTheme } from "./theme";
 import { VscColorMode } from "react-icons/vsc";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -87,19 +88,17 @@ const ThemeBtn = styled.div`
 `;
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const changeTheme = () => {
-    setDarkMode(darkMode => !darkMode);
-  }
+  
+  const isDark = useRecoilValue(isDarkAtom);
 
   return (
     <>
-      <ThemeProvider theme={darkMode ? defaultTheme : whiteTheme}>
+      <ThemeProvider theme={ isDark ? defaultTheme : whiteTheme }>
         <GlobalStyle />
-        <Router darkMode={darkMode} />
+        <Router />
         <ReactQueryDevtools initialIsOpen={true} />
         <ThemeBtn>
-          <VscColorMode className="icon" onClick={changeTheme}/>
+          <VscColorMode className="icon" />
         </ThemeBtn>
       </ThemeProvider>
     </>

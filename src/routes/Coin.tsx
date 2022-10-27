@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
-import {Helmet} from "react-helmet";
-import {Link} from "react-router-dom";
-import {Routes, Route, useParams, useLocation, useMatch} from "react-router";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import { Routes, Route, useParams, useLocation, useMatch } from "react-router";
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
@@ -161,9 +161,7 @@ interface LocationState{
 //     }
 // }
 
-interface ICoin{
-    darkMode: boolean;
-}
+interface ICoin{}
 
 /**
  * router-dom 6버전 이상부터 useParams는
@@ -173,7 +171,7 @@ interface ICoin{
  * Coin에 대한 상세페이지를 표현하는 컴포넌트
  * @returns 
  */
- function Coin({darkMode}:ICoin){
+ function Coin({}:ICoin){
     const {coinId} = useParams();
     const {state} = useLocation() as LocationState;
     const priceMatch = useMatch("/:coindId/price");
@@ -256,7 +254,7 @@ interface ICoin{
 
             <Routes>
                 <Route path="chart" 
-                    element={<Chart darkMode={darkMode} coinId={coinId as string}/>} />
+                    element={<Chart coinId={coinId as string}/>} />
                 <Route path="price" 
                     element={<Price coinId={coinId as string}/>} />
             </Routes>
